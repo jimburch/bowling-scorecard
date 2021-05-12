@@ -1,0 +1,13 @@
+.frames-container {
+	display: flex;
+}
+
+.frame {
+	/* display: flex; */
+	width: 100px;
+	height: 100px;
+	border: 1px black solid;
+}
+
+.frame-corner {
+}
