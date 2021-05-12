@@ -1,13 +1,19 @@
 .frames-container {
 	display: flex;
+	margin: 25px;
 }
 
 .frame {
-	/* display: flex; */
+	display: grid;
+	grid-template-rows: 50% 50%;
+	grid-template-columns: 50% 50%;
 	width: 100px;
 	height: 100px;
 	border: 1px black solid;
+	margin-right: -1px;
 }
 
-.frame-corner {
+.turn-two {
+	border: 1px black solid;
+	margin: -1px;
 }
