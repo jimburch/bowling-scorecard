@@ -4,31 +4,26 @@ import Scorecard from './components/Scorecard';
 import './App.css';
 
 function App() {
-	const [frame, setFrame] = useState(1);
-	const [turn, setTurn] = useState(1);
-	const [pins, setPins] = useState(10);
+	const [score, setScore] = useState(0);
+	const [boxScore, setBoxScore] = useState({
+		1: ['', '', null],
+		2: ['', '', null],
+		3: ['', '', null],
+		4: ['', '', null],
+		5: ['', '', null],
+		6: ['', '', null],
+		7: ['', '', null],
+		8: ['', '', null],
+		9: ['', '', null],
+		10: ['', '', '', null],
+	});
 
 	return (
 		<div className="App">
 			<h1>Bowling Scorecard</h1>
-			<h3>
-				Frame {frame}, Turn {turn}
-			</h3>
-			<Input
-				frame={frame}
-				setFrame={setFrame}
-				turn={turn}
-				setTurn={setTurn}
-				pins={pins}
-				setPins={setPins}
-			/>
-			<Scorecard
-				frame={frame}
-				turn={turn}
-				setTurn={setTurn}
-				pins={pins}
-				setPins={setPins}
-			/>
+			<h3>Score: {score}</h3>
+			<Input boxScore={boxScore} setBoxScore={setBoxScore} />
+			<Scorecard boxScore={boxScore} />
 		</div>
 	);
 }
