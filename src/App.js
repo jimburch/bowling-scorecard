@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Input from './components/Input';
 import Scorecard from './components/Scorecard';
 import './App.css';
@@ -11,8 +11,12 @@ function App() {
 	return (
 		<div className="App">
 			<h1>Bowling Scorecard</h1>
+			<h3>
+				Frame {frame}, Turn {turn}
+			</h3>
 			<Input
 				frame={frame}
+				setFrame={setFrame}
 				turn={turn}
 				setTurn={setTurn}
 				pins={pins}
