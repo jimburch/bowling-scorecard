@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function Input(props) {
 	function renderPins(pins) {
@@ -15,15 +15,22 @@ function Input(props) {
 
 	function handleClick(e) {
 		e.preventDefault();
-		props.setPins(10 - e.target.value);
-		props.setTurn(props.turn + 1);
+		if (props.frame < 10) {
+			if (props.turn !== 1 || e.target.value === '10') {
+				props.setPins(10);
+				props.setTurn(1);
+				props.setFrame(props.frame + 1);
+			} else {
+				props.setPins(10 - e.target.value);
+				props.setTurn(props.turn + 1);
+			}
+		}
 	}
 
 	const pinChoices = renderPins(props.pins);
 
 	return (
 		<div className="input">
-			<div>Turn {props.turn}</div>
 			<div>How many pins did you knock down?</div>
 			{pinChoices}
 		</div>
