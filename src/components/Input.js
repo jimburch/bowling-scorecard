@@ -31,6 +31,7 @@ function Input({ boxScore, setBoxScore }) {
 				boxScore[currentFrame + 1][3] +
 				boxScore[currentFrame + 2][3];
 		}
+		frame[4] = 1;
 	}
 
 	function calculateSpare(currentFrame) {
@@ -43,6 +44,7 @@ function Input({ boxScore, setBoxScore }) {
 		} else {
 			frame[2] = frame[3] + boxScore[currentFrame + 1][3];
 		}
+		frame[4] = 1;
 	}
 
 	function calculateScore(currentFrame) {
@@ -52,26 +54,25 @@ function Input({ boxScore, setBoxScore }) {
 		} else {
 			frame[2] = frame[3];
 		}
-		console.log(frame);
+		frame[4] = 1;
 	}
 
 	function scoreLoop(currentFrame) {
 		for (let i = 1; i <= currentFrame; i++) {
-			if (boxScore[i][1] === 'X' && boxScore[i + 2][3]) {
+			if (boxScore[i][1] === 'X' && boxScore[i + 2][1]) {
 				calculateStrike(i);
-				console.log('calc strike!');
-			} else if (boxScore[i][1] === '/' && boxScore[i + 1][3]) {
+			} else if (boxScore[i][1] === '/' && boxScore[i + 1][1]) {
 				calculateSpare(i);
-				console.log('calc spare!');
 			} else if (
 				boxScore[i][1] &&
 				boxScore[i][1] !== 'X' &&
-				boxScore[i][1] !== '/'
+				boxScore[i][1] !== '/' &&
+				boxScore[i - 1][4]
 			) {
 				calculateScore(i);
-				console.log('calc score!');
 			}
 		}
+		console.log(boxScore);
 	}
 
 	function updateScorecard(currentFrame, currentTurn, currentScore) {
@@ -81,7 +82,6 @@ function Input({ boxScore, setBoxScore }) {
 			frame[currentTurn] = 'X';
 			frame[3] = 10;
 			setBoxScore({ ...boxScore, currentFrame: frame });
-			console.log('strike!');
 		} else if (
 			currentTurn === 2 &&
 			Number(frame[0]) + Number(currentScore) === 10
@@ -89,14 +89,53 @@ function Input({ boxScore, setBoxScore }) {
 			frame[currentTurn - 1] = '/';
 			frame[3] = 10;
 			setBoxScore({ ...boxScore, currentFrame: frame });
-			console.log('spare!');
 		} else {
 			frame[currentTurn - 1] = currentScore;
 			if (currentTurn === 2) {
 				frame[3] = Number(frame[0]) + Number(frame[1]);
 			}
 			setBoxScore({ ...boxScore, currentFrame: frame });
-			console.log('score!');
+		}
+
+		scoreLoop(currentFrame);
+	}
+
+	function handleLastFrame(currentFrame, currentTurn, currentScore) {
+		let frame = boxScore[currentFrame];
+
+		if (currentFrame === 10) {
+			if (currentScore === '10') {
+				frame[1] = 'X';
+				frame[3] = 10;
+			} else {
+				frame[1] = currentScore;
+				frame[3] = Number(currentScore);
+			}
+			setBoxScore({ ...boxScore, currentFrame: frame });
+		} else if (currentFrame === 11) {
+			if (Number(boxScore[10][1]) + Number(currentScore) === 10) {
+				frame[1] = '/';
+				frame[3] = Number(currentScore);
+			} else if (currentScore === '10') {
+				frame[1] = 'X';
+				frame[3] = 10;
+			} else {
+				frame[1] = currentScore;
+				frame[3] = Number(currentScore);
+			}
+			setBoxScore({ ...boxScore, currentFrame: frame });
+		} else {
+			if (Number(boxScore[10][1]) + Number(currentScore) === 10) {
+				frame[1] = '/';
+				frame[3] = Number(currentScore);
+			} else if (currentScore === '10') {
+				frame[1] = 'X';
+				frame[3] = 10;
+			} else {
+				frame[1] = currentScore;
+				frame[3] = Number(currentScore);
+			}
+			setBoxScore({ ...boxScore, currentFrame: frame });
 		}
 
 		scoreLoop(currentFrame);
@@ -104,8 +143,8 @@ function Input({ boxScore, setBoxScore }) {
 
 	function handleClick(e) {
 		e.preventDefault();
-		updateScorecard(frame, turn, e.target.value);
 		if (frame < 10) {
+			updateScorecard(frame, turn, e.target.value);
 			if (turn !== 1 || e.target.value === '10') {
 				setPins(10);
 				setTurn(1);
@@ -115,16 +154,36 @@ function Input({ boxScore, setBoxScore }) {
 				setTurn(turn + 1);
 			}
 		}
+		if (frame === 10) {
+			handleLastFrame(frame, turn, e.target.value);
+			setPins(10);
+			setTurn(1);
+			setFrame(frame + 1);
+		}
+		if (frame === 11) {
+			handleLastFrame(frame, turn, e.target.value);
+			if (
+				boxScore[10][1] === 'X' ||
+				Number(boxScore[10][1]) + Number(e.target.value) === 10
+			) {
+				setPins(10);
+				setTurn(1);
+				setFrame(frame + 1);
+			} else {
+				console.log('game over');
+			}
+		}
+		if (frame === 12) {
+			handleLastFrame(frame, turn, e.target.value);
+			console.log('game over');
+		}
 	}
 
 	const pinChoices = renderPins(pins);
 
 	return (
 		<div className="input">
-			<h3>
-				Frame {frame}, Turn {turn}
-			</h3>
-			<div>How many pins did you knock down?</div>
+			<h3>How many pins did you knock down?</h3>
 			{pinChoices}
 		</div>
 	);
