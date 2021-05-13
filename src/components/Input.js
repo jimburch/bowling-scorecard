@@ -72,7 +72,6 @@ function Input({ boxScore, setBoxScore }) {
 				calculateScore(i);
 			}
 		}
-		console.log(boxScore);
 	}
 
 	function updateScorecard(currentFrame, currentTurn, currentScore) {
@@ -125,7 +124,7 @@ function Input({ boxScore, setBoxScore }) {
 			}
 			setBoxScore({ ...boxScore, currentFrame: frame });
 		} else {
-			if (Number(boxScore[10][1]) + Number(currentScore) === 10) {
+			if (Number(boxScore[11][1]) + Number(currentScore) === 10) {
 				frame[1] = '/';
 				frame[3] = Number(currentScore);
 			} else if (currentScore === '10') {
@@ -139,6 +138,7 @@ function Input({ boxScore, setBoxScore }) {
 		}
 
 		scoreLoop(currentFrame);
+		console.log(boxScore);
 	}
 
 	function handleClick(e) {
@@ -156,21 +156,30 @@ function Input({ boxScore, setBoxScore }) {
 		}
 		if (frame === 10) {
 			handleLastFrame(frame, turn, e.target.value);
-			setPins(10);
 			setTurn(1);
-			setFrame(frame + 1);
+			setFrame(11);
+			if (e.target.value !== '10') {
+				setPins(10 - e.target.value);
+			} else {
+				setPins(10);
+			}
 		}
 		if (frame === 11) {
 			handleLastFrame(frame, turn, e.target.value);
 			if (
-				boxScore[10][1] === 'X' ||
+				boxScore[10][3] === 10 ||
 				Number(boxScore[10][1]) + Number(e.target.value) === 10
 			) {
 				setPins(10);
-				setTurn(1);
-				setFrame(frame + 1);
+				setFrame(12);
+			} else if (
+				boxScore[10][3] === 10 &&
+				Number(boxScore[10][1]) + Number(e.target.value) !== 10
+			) {
+				setPins(10 - e.target.value);
+				setFrame(12);
 			} else {
-				console.log('game over');
+				console.log('game over!');
 			}
 		}
 		if (frame === 12) {
