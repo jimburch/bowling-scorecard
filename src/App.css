@@ -1,6 +1,23 @@
+.App {
+	margin: 20px;
+}
+
+button {
+	background-color: white;
+	padding: 7px 15px;
+	margin: 10px 3px;
+	border: 1px black solid;
+	border-radius: 5px;
+}
+
+button:hover {
+	background-color: black;
+	color: white;
+}
+
 .frames-container {
 	display: flex;
-	margin: 10px;
+	/* margin: 10px; */
 }
 
 .frame {
