@@ -6,16 +6,17 @@ import './App.css';
 function App() {
 	const [score, setScore] = useState(0);
 	const [boxScore, setBoxScore] = useState({
-		1: ['', '', null],
-		2: ['', '', null],
-		3: ['', '', null],
-		4: ['', '', null],
-		5: ['', '', null],
-		6: ['', '', null],
-		7: ['', '', null],
-		8: ['', '', null],
-		9: ['', '', null],
-		10: ['', '', '', null],
+		// frame: [turn 1, turn 2, (turn 3), subtotal, frame total]
+		1: ['', '', null, null],
+		2: ['', '', null, null],
+		3: ['', '', null, null],
+		4: ['', '', null, null],
+		5: ['', '', null, null],
+		6: ['', '', null, null],
+		7: ['', '', null, null],
+		8: ['', '', null, null],
+		9: ['', '', null, null],
+		10: ['', '', '', null, null],
 	});
 
 	return (
@@ -23,7 +24,12 @@ function App() {
 			<h1>Bowling Scorecard</h1>
 			<h3>Score: {score}</h3>
 			<Input boxScore={boxScore} setBoxScore={setBoxScore} />
-			<Scorecard boxScore={boxScore} />
+			<Scorecard
+				score={score}
+				setScore={setScore}
+				boxScore={boxScore}
+				setBoxScore={setBoxScore}
+			/>
 		</div>
 	);
 }
