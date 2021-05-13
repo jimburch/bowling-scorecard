@@ -14,15 +14,27 @@ function Scorecard({ score, setScore, boxScore, setBoxScore }) {
 
 	const frames = renderScorecard();
 
+	function renderFinalScore() {
+		if (boxScore[12][2]) {
+			return boxScore[12][2];
+		} else if (boxScore[11][2]) {
+			return boxScore[11][2];
+		} else if (boxScore[12][1] === 'X') {
+			return boxScore[10][2];
+		}
+	}
+
+	const finalScore = renderFinalScore();
+
 	return (
 		<div className="scorecard">
 			<div className="frames-container">
 				{frames}
 				<div className="frame" value={10}>
-					<div className="turn-one">{boxScore[10][0]}</div>
-					<div className="turn-two">{boxScore[10][1]}</div>
-					<div className="turn-three">{boxScore[10][2]}</div>
-					<div className="subtotal"></div>
+					<div className="turn-one">{boxScore[10][1]}</div>
+					<div className="turn-two">{boxScore[11][1]}</div>
+					<div className="turn-three">{boxScore[12][1]}</div>
+					<div className="subtotal">{finalScore}</div>
 				</div>
 			</div>
 		</div>
