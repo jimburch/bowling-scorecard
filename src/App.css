@@ -17,20 +17,85 @@ button:hover {
 
 .frames-container {
 	display: flex;
-	/* margin: 10px; */
 }
 
 .frame {
 	display: grid;
 	grid-template-rows: 50% 50%;
-	grid-template-columns: 50% 50%;
 	width: 100px;
 	height: 100px;
 	border: 1px black solid;
 	margin-right: -1px;
 }
 
+.frame-top-row {
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.turn-one {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .turn-two {
+	display: flex;
 	border: 1px black solid;
 	margin: -1px;
+	justify-content: center;
+	align-items: center;
+}
+
+.subtotal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.last-frame {
+	display: grid;
+	grid-template-rows: 50% 50%;
+	width: 150px;
+	height: 100px;
+	border: 1px black solid;
+	margin-right: -1px;
+}
+
+.last-frame-top-row {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+}
+
+.last-turn-one {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.last-turn-two {
+	border: 1px black solid;
+	margin-top: -1px;
+	margin-right: -1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.last-turn-three {
+	border: 1px black solid;
+	margin-top: -1px;
+	margin-right: -2px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.last-subtotal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
