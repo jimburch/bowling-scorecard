@@ -3,11 +3,15 @@
 }
 
 .frame {
-	/* display: flex; */
+	display: flex;
 	width: 100px;
 	height: 100px;
 	border: 1px black solid;
+	justify-content: flex-end;
+	/* align-items: flex-start; */
 }
 
 .frame-corner {
+	align-self: center;
+	justify-items: center;
 }
