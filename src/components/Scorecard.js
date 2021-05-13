@@ -1,14 +1,13 @@
 import React from 'react';
 
-function Scorecard() {
+function Scorecard({ boxScore }) {
 	function renderScorecard() {
-		const framesArray = [];
-		for (let i = 1; i < 10; i++) {
-			framesArray.push(i);
-		}
-		return framesArray.map((index, frame) => (
+		const frameArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		return frameArray.map((frame, index) => (
 			<div className="frame" key={index} value={frame}>
-				y<div className="frame-corner">x</div>
+				<div className="turn-one">{boxScore[frame][0]}</div>
+				<div className="turn-two">{boxScore[frame][1]}</div>
+				<div className="subtotal">{boxScore[frame][2]}</div>
 			</div>
 		));
 	}
@@ -17,12 +16,13 @@ function Scorecard() {
 
 	return (
 		<div className="scorecard">
-			<h1>Scorecard</h1>
 			<div className="frames-container">
 				{frames}
 				<div className="frame" value={10}>
-					y<div className="frame-corner">x</div>
-					<div className="frame-corner">x</div>
+					<div className="turn-one">{boxScore[10][0]}</div>
+					<div className="turn-two">{boxScore[10][1]}</div>
+					<div className="turn-three">{boxScore[10][2]}</div>
+					<div className="subtotal">{boxScore[10][3]}</div>
 				</div>
 			</div>
 		</div>

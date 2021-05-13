@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Input(props) {
+function Input({ boxScore, setBoxScore }) {
+	const [frame, setFrame] = useState(1);
+	const [turn, setTurn] = useState(1);
+	const [pins, setPins] = useState(10);
 	function renderPins(pins) {
 		const pinArray = [];
 		for (let i = 0; i <= pins; i++) {
@@ -15,22 +18,53 @@ function Input(props) {
 
 	function handleClick(e) {
 		e.preventDefault();
-		if (props.frame < 10) {
-			if (props.turn !== 1 || e.target.value === '10') {
-				props.setPins(10);
-				props.setTurn(1);
-				props.setFrame(props.frame + 1);
+		updateScorecard(frame, turn, e.target.value);
+		if (frame < 10) {
+			if (turn !== 1 || e.target.value === '10') {
+				setPins(10);
+				setTurn(1);
+				setFrame(frame + 1);
 			} else {
-				props.setPins(10 - e.target.value);
-				props.setTurn(props.turn + 1);
+				setPins(10 - e.target.value);
+				setTurn(turn + 1);
 			}
 		}
 	}
 
-	const pinChoices = renderPins(props.pins);
+	const pinChoices = renderPins(pins);
+
+	function updateScorecard(currentFrame, currentTurn, currentScore) {
+		let frame = boxScore[currentFrame];
+
+		if (currentTurn === 1 && currentScore === '10') {
+			frame[currentTurn] = 'X';
+			setBoxScore({ ...boxScore, currentFrame: frame });
+			console.log('strike!');
+		} else if (
+			currentTurn === 2 &&
+			Number(frame[0]) + Number(currentScore) === 10
+		) {
+			frame[currentTurn - 1] = '/';
+			setBoxScore({ ...boxScore, currentFrame: frame });
+			console.log('spare!');
+		} else {
+			frame[currentTurn - 1] = currentScore;
+			setBoxScore({ ...boxScore, currentFrame: frame });
+			console.log('score!');
+		}
+	}
+
+	function calculateScores() {
+		for (let frame in boxScore) {
+			// figure out how to do this shit
+		}
+	}
 
 	return (
 		<div className="input">
+			<h3>
+				Frame {frame}, Turn {turn}
+			</h3>
 			<div>How many pins did you knock down?</div>
 			{pinChoices}
 		</div>
