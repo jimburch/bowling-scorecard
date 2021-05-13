@@ -4,7 +4,6 @@ import Scorecard from './components/Scorecard';
 import './App.css';
 
 function App() {
-	const [score, setScore] = useState(0);
 	const [boxScore, setBoxScore] = useState({
 		// frame: [turn 1, turn 2, (turn 3), game subtotal, frame total]
 		0: ['', '', null, null, 1],
@@ -31,12 +30,7 @@ function App() {
 		<div className="App">
 			<h1>Bowling Scorecard</h1>
 			<Input boxScore={boxScore} setBoxScore={setBoxScore} />
-			<Scorecard
-				score={score}
-				setScore={setScore}
-				boxScore={boxScore}
-				setBoxScore={setBoxScore}
-			/>
+			<Scorecard boxScore={boxScore} setBoxScore={setBoxScore} />
 		</div>
 	);
 }
