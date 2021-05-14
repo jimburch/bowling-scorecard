@@ -9,7 +9,6 @@ function Input({ boxScore, setBoxScore, toggle, setToggle, reset, setReset }) {
 		setPins(10);
 		setFrame(1);
 		setReset(false);
-		console.log('render');
 	}, [reset]);
 
 	function renderPins(pins) {
@@ -208,7 +207,7 @@ function Input({ boxScore, setBoxScore, toggle, setToggle, reset, setReset }) {
 	return (
 		<div className="input">
 			<h3>How many pins did you knock down?</h3>
-			{pinChoices}
+			<div className="pin-choices">{pinChoices}</div>
 		</div>
 	);
 }
