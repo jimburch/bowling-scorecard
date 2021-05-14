@@ -52,7 +52,8 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1>Bowling Scorecard</h1>
+			<h1>JIM'S BOWL-O-RAMA 🎳</h1>
+			<div className="subtitle">Fire this up on desktop for best results</div>
 			<Input
 				boxScore={boxScore}
 				setBoxScore={setBoxScore}
@@ -62,14 +63,35 @@ function App() {
 				setReset={setReset}
 			/>
 			<Scorecard boxScore={boxScore} setBoxScore={setBoxScore} />
-			{toggle ? (
+			<div className="reset">
+				{toggle ? (
+					<div>
+						<h3>Great game! How about another?</h3>
+						<button onClick={resetScorecard}>New Game</button>
+					</div>
+				) : (
+					<button onClick={resetScorecard}>Reset Game</button>
+				)}
+			</div>
+			<footer>
+				<a
+					href="https://www.wikihow.com/Score-Bowling"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Learn how to keep score
+				</a>
 				<div>
-					<h3>Great game! How about another?</h3>
-					<button onClick={resetScorecard}>New Game</button>
+					Developed by{' '}
+					<a
+						href="https://github.com/JimBurch/bowling-scorecard"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Jim
+					</a>
 				</div>
-			) : (
-				<button onClick={resetScorecard}>Reset Game</button>
-			)}
+			</footer>
 		</div>
 	);
 }
