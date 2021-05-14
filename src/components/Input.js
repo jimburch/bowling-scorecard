@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function Input({ boxScore, setBoxScore }) {
+function Input({ boxScore, setBoxScore, toggle, setToggle, reset, setReset }) {
 	const [frame, setFrame] = useState(1);
 	const [turn, setTurn] = useState(1);
 	const [pins, setPins] = useState(10);
+
+	useEffect(() => {
+		setPins(10);
+		setFrame(1);
+		setReset(false);
+		console.log('render');
+	}, [reset]);
 
 	function renderPins(pins) {
 		const pinArray = [];
@@ -138,7 +145,12 @@ function Input({ boxScore, setBoxScore }) {
 		}
 
 		scoreLoop(currentFrame);
-		console.log(boxScore);
+	}
+
+	function gameOver() {
+		setPins(10);
+		setFrame(13);
+		setToggle(true);
 	}
 
 	function handleClick(e) {
@@ -173,24 +185,21 @@ function Input({ boxScore, setBoxScore }) {
 				boxScore[10][3] === 10 &&
 				boxScore[10][3] + Number(e.target.value) !== 10
 			) {
-				console.log('open');
 				setPins(10 - e.target.value);
 				setFrame(12);
 			} else if (
 				boxScore[10][3] === 10 ||
 				boxScore[10][3] + Number(e.target.value) === 10
 			) {
-				console.log('strike or spare');
 				setPins(10);
 				setFrame(12);
 			} else {
-				console.log('game over!');
+				gameOver();
 			}
 		}
 		if (frame === 12) {
 			handleLastFrame(frame, turn, e.target.value);
-			console.log('game over');
-			// create end game validation
+			gameOver();
 		}
 	}
 
