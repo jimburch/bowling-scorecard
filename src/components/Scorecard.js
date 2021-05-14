@@ -17,11 +17,23 @@ function Scorecard({ boxScore, setBoxScore }) {
 	const frames = renderScorecard();
 
 	function renderFinalScore() {
-		if (boxScore[12][2]) {
-			return boxScore[12][2];
-		} else if (boxScore[11][2]) {
+		console.log(boxScore);
+		// open
+		if (boxScore[11][1] && boxScore[10][3] + boxScore[11][3] < 10) {
 			return boxScore[11][2];
-		} else if (boxScore[12][1] === 'X') {
+		}
+		// spare -> open
+		// spare -> strike
+		if (boxScore[10][3] + boxScore[11][3] === 10 && boxScore[12]) {
+			return boxScore[11][2];
+		}
+		// strike -> open
+		// strike -> spare
+		if (boxScore[10][3] === 10 && boxScore[12][3] < 10) {
+			return boxScore[10][2];
+		}
+		// three strikes
+		if (boxScore[10][3] + boxScore[11][3] + boxScore[12][3] === 30) {
 			return boxScore[10][2];
 		}
 	}
