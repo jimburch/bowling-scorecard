@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Confetti from 'react-confetti';
 import Input from './components/Input';
 import Scorecard from './components/Scorecard';
 import './App.css';
@@ -52,6 +53,7 @@ function App() {
 
 	return (
 		<div className="App">
+			{boxScore[10][2] === 300 ? <Confetti /> : null}
 			<h1>JIM'S BOWL-O-RAMA 🎳</h1>
 			<div className="subtitle">Fire this up on desktop for best results</div>
 			<Input
