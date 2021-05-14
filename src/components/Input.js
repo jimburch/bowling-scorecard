@@ -166,17 +166,22 @@ function Input({ boxScore, setBoxScore }) {
 		}
 		if (frame === 11) {
 			handleLastFrame(frame, turn, e.target.value);
-			if (
-				boxScore[10][3] === 10 ||
-				Number(boxScore[10][1]) + Number(e.target.value) === 10
-			) {
+			if (e.target.value === '10') {
 				setPins(10);
 				setFrame(12);
 			} else if (
 				boxScore[10][3] === 10 &&
-				Number(boxScore[10][1]) + Number(e.target.value) !== 10
+				boxScore[10][3] + Number(e.target.value) !== 10
 			) {
+				console.log('open');
 				setPins(10 - e.target.value);
+				setFrame(12);
+			} else if (
+				boxScore[10][3] === 10 ||
+				boxScore[10][3] + Number(e.target.value) === 10
+			) {
+				console.log('strike or spare');
+				setPins(10);
 				setFrame(12);
 			} else {
 				console.log('game over!');
@@ -185,6 +190,7 @@ function Input({ boxScore, setBoxScore }) {
 		if (frame === 12) {
 			handleLastFrame(frame, turn, e.target.value);
 			console.log('game over');
+			// create end game validation
 		}
 	}
 
