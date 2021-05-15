@@ -14,7 +14,7 @@ Easter egg: Bowl a 300 for a party surprise!
 
 In the project directory, you can run:
 
-### `npm install'
+### `npm install`
 
 ### `npm start`
 
