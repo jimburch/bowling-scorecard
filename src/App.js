@@ -56,15 +56,17 @@ function App() {
 			{boxScore[10][2] === 300 ? <Confetti /> : null}
 			<h1>JIM'S BOWL-O-RAMA 🎳</h1>
 			<div className="subtitle">Fire this up on desktop for best results</div>
-			<Input
-				boxScore={boxScore}
-				setBoxScore={setBoxScore}
-				toggle={toggle}
-				setToggle={setToggle}
-				reset={reset}
-				setReset={setReset}
-			/>
-			<Scorecard boxScore={boxScore} setBoxScore={setBoxScore} />
+			<div className="score-container">
+				<Input
+					boxScore={boxScore}
+					setBoxScore={setBoxScore}
+					toggle={toggle}
+					setToggle={setToggle}
+					reset={reset}
+					setReset={setReset}
+				/>
+				<Scorecard boxScore={boxScore} setBoxScore={setBoxScore} />
+			</div>
 			<div className="reset">
 				{toggle ? (
 					<div>
