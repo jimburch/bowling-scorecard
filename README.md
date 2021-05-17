@@ -39,6 +39,6 @@ This app is deployed using Heroku. [See it live.](https://desolate-ravine-27106.
 ## Tech Stack
 
 - React
-- npm-confetti
+- react-confetti
 - CSS
 - Deployed on Heroku
