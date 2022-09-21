@@ -17,7 +17,7 @@
   # Default build command.
   command = "echo 'default context'"
 
-  CI = "npm run build"
+  CI='' npm run build
 
 [[plugins]]
   # Installs the Lighthouse Build Plugin for all deploy contexts
